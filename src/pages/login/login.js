@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { apiUrl } from '../../services/util';
 
 function Login() {
 
     const initialState = {
         email: '',
-        password: ''
+        password: '',
+        errorMessage: null,
+        successMessage: null,
+        isSubmitting: false
     }
 
     const [data, setData] = useState(initialState);
@@ -18,11 +23,58 @@ function Login() {
         })
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setData({
+            ...data,
+            errorMessage: null,
+            successMessage: null,
+            isSubmitting: true
+        })
+
+        if(data.email !== '' && data.password !== '') {
+
+            axios.post(`${apiUrl}/user/login`,{
+                email: data.email,
+                password: data.password
+            })
+            .then(res => {
+                console.log(res);
+
+                setData({
+                    ...data,
+                    isSubmitting: false,
+                    successMessage: 'Successful sign in',
+                    errorMessage: null
+                })
+            })
+            .catch(error => {
+                console.error(error);
+
+                setData({
+                    ...data,
+                    isSubmitting: false,
+                    errorMessage: 'Sign in failed!',
+                    successMessage: null
+                })
+            })
+        } else {
+
+            setData({
+                ...data,
+                errorMessage: 'Empty field',
+                successMessage: null,
+                isSubmitting: false
+            })
+        }
+    }
+
     return (
         <section className='login-section d-flex flex-column justify-content-center align-items-center'>
             {console.log(data)}
             <h3 className='text-center'>Sign In</h3>
-            <form className='w-75'>
+            <form className='w-75' onSubmit={handleSubmit}>
                 <div className="form-group mb-3">
                     <input 
                         type="email" 
@@ -44,7 +96,13 @@ function Login() {
                     />
                 </div>
                 <div className="">
-                    <button type='submit' className='btn btn-primary btn-block'>Log In</button>
+                    <button 
+                        type='submit' 
+                        className='btn btn-primary btn-block' 
+                        disabled={data.isSubmitting ? true : false}
+                    >
+                        {data.isSubmitting ? 'Submitting...' : 'Log In'}
+                    </button>
                 </div>
             </form>
         </section>
