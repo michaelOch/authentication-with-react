@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { apiUrl } from '../../services/util';
+import useAuth from '../../services/auth';
 
 function Login() {
 
@@ -13,6 +15,9 @@ function Login() {
     }
 
     const [data, setData] = useState(initialState);
+    const navigate = useNavigate();
+    const { login } = useAuth();
+    const { state } = useLocation();
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -48,6 +53,10 @@ function Login() {
                     successMessage: 'Successful sign in',
                     errorMessage: null
                 })
+
+                login().then(() => {
+                    navigate(state?.path || '/home');
+                });
             })
             .catch(error => {
                 console.error(error);

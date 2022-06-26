@@ -1,30 +1,47 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { AuthProvider } from './services/auth';
+import RequireAuth from './components/RequireAuth/RequireAuth';
 import Login from './pages/login/login';
 import Register from './pages/register/register';
 import Home from './pages/index/index';
 
 function App() {
     return (
-        <Router>
-            <Routes>
-                <Route
-                    exact
-                    path='/'
-                    element={<Login />}
-                />
-                <Route
-                    exact
-                    path='/register'
-                    element={<Register />}
-                />
-                <Route
-                    exact
-                    path='/home'
-                    element={<Home />}
-                />
-            </Routes>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route
+                        exact
+                        path='/'
+                        element={
+                            <RequireAuth>
+                                <Home />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        exact
+                        path='/home'
+                        element={
+                            <RequireAuth>
+                                <Home />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        exact
+                        path='/login'
+                        element={<Login />}
+                    />
+                    <Route
+                        exact
+                        path='/register'
+                        element={<Register />}
+                    />
+                </Routes>
+            </Router>
+        </AuthProvider>
     );
 }
 
