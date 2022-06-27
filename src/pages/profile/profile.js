@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../services/auth';
 
 function Profile() {
@@ -19,16 +19,16 @@ function Profile() {
                 {authed?.user && <button className='btn btn-primary' onClick={handleLogout}>Logout</button>}
                 <ul className='list-group'>
                     <li className='list-group-item'>
-                        <a className='' href='/home'>Home</a>
+                        <Link className='' to='/home'>Home</Link>
                     </li>
                     <li className='list-group-item'>
-                        <a className='' href='/profile'>Profile</a>
+                        <Link className='' to='/profile'>Profile</Link>
                     </li>
                     <li className='list-group-item'>
-                        <a className='' href='/login'>Login</a>
+                        <Link className='' to='/login'>Login</Link>
                     </li>
                     <li className='list-group-item'>
-                        <a className='' href='/register'>Register</a>
+                        <Link className='' to='/register'>Register</Link>
                     </li>
                 </ul>
             </div>
