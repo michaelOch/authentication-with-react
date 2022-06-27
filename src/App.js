@@ -12,42 +12,18 @@ function App() {
         <AuthProvider>
             <Router>
                 <Routes>
+                    <Route element={<RequireAuth />}>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/home' element={<Home />} />
+                        <Route path='/profile' element={<Profile />} />
+                    </Route>
                     <Route
-                        exact
-                        path='/'
-                        element={
-                            <RequireAuth>
-                                <Home />
-                            </RequireAuth>
-                        }
-                    />
-                    <Route
-                        exact
-                        path='/home'
-                        element={
-                            <RequireAuth>
-                                <Home />
-                            </RequireAuth>
-                        }
-                    />
-                    <Route
-                        exact
                         path='/login'
                         element={<Login />}
                     />
                     <Route
-                        exact
                         path='/register'
                         element={<Register />}
-                    />
-                    <Route
-                        exact
-                        path='/profile'
-                        element={
-                            <RequireAuth>
-                                <Profile />
-                            </RequireAuth>
-                        }
                     />
                 </Routes>
             </Router>
