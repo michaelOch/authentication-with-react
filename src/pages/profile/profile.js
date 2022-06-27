@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../services/auth';
 
-function Index() {
+function Profile() {
 
     const { authed, logout } = useAuth();
     const navigate = useNavigate();
@@ -13,10 +13,9 @@ function Index() {
     }
 
     return (
-        <section className='home-section'>
+        <section className='profile-section'>
             <div className='p-5'>
-                <h2 className='text-primary'>Home Page</h2>
-                <h2 className='text-success'>Welcome!!!</h2>
+                <h2 className='text-primary'>Profile Page</h2>
                 {authed?.user && <button className='btn btn-primary' onClick={handleLogout}>Logout</button>}
                 <ul className='list-group'>
                     <li className='list-group-item'>
@@ -37,4 +36,4 @@ function Index() {
     )
 }
 
-export default Index;
+export default Profile;

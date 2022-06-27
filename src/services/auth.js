@@ -4,19 +4,19 @@ const authContext = createContext();
 
 function useAuth() {
 
-    const [authed, setAuthed] = useState(false);
+    const [authed, setAuthed] = useState();
 
     return {
         authed,
-        login() {
+        login(data) {
             return new Promise((res) => {
-                setAuthed(true);
+                setAuthed(data);
                 res();
             });
         },
         logout() {
             return new Promise((res) => {
-                setAuthed(false);
+                setAuthed(null);
                 res();
             });
         }

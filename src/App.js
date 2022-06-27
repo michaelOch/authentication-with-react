@@ -5,6 +5,7 @@ import RequireAuth from './components/RequireAuth/RequireAuth';
 import Login from './pages/login/login';
 import Register from './pages/register/register';
 import Home from './pages/index/index';
+import Profile from './pages/profile/profile';
 
 function App() {
     return (
@@ -38,6 +39,15 @@ function App() {
                         exact
                         path='/register'
                         element={<Register />}
+                    />
+                    <Route
+                        exact
+                        path='/profile'
+                        element={
+                            <RequireAuth>
+                                <Profile />
+                            </RequireAuth>
+                        }
                     />
                 </Routes>
             </Router>

@@ -45,7 +45,7 @@ function Login() {
                 password: data.password
             })
             .then(res => {
-                console.log(res);
+                console.log(res.data);
 
                 setData({
                     ...data,
@@ -54,7 +54,7 @@ function Login() {
                     errorMessage: null
                 })
 
-                login().then(() => {
+                login(res.data).then(() => {
                     navigate(state?.path || '/home');
                 });
             })
