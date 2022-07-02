@@ -8,6 +8,7 @@ function useAuth() {
 
     return {
         authed,
+        setAuthed,
         login(data) {
             return new Promise((res) => {
                 setAuthed(data);

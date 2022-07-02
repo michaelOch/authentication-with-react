@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../api/axios';
 import { apiUrl } from '../../services/util';
 import useAuth from '../../services/auth';
+
+const LOGIN_URL = '/user/login';
 
 function Login() {
 
@@ -40,12 +42,15 @@ function Login() {
 
         if(data.email !== '' && data.password !== '') {
 
-            axios.post(`${apiUrl}/user/login`,{
+            axios.post(LOGIN_URL,{
                 email: data.email,
                 password: data.password
+            },
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
             })
             .then(res => {
-                console.log(res.data);
 
                 setData({
                     ...data,

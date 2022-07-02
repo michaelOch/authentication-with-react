@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../../api/axios';
 import { apiUrl } from '../../services/util';
+
+const REGISTER_URL = '/user/register';
 
 function Register() {
 
     const initialState = {
+        name: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -34,13 +37,18 @@ function Register() {
             isSubmitting: true
         })
 
-        if(data.email !== '' && data.password !== '' && data.confirmPassword !== '') {
+        if(data.name !== '' && data.email !== '' && data.password !== '' && data.confirmPassword !== '') {
 
             if(data.password === data.confirmPassword) {
 
-                axios.post(`${apiUrl}/user/register`, {
+                axios.post(REGISTER_URL, {
+                    name: data.name,
                     email: data.email,
                     password: data.password
+                },
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
                 })
                 .then(res => {
                     console.log(res);
@@ -89,6 +97,16 @@ function Register() {
             {console.log(data)}
             <h3 className='text-center'>Sign Up</h3>
             <form className='w-75' onSubmit={handleSubmit}>
+                <div className='form-group mb-3'>
+                    <input 
+                        type='text' 
+                        name='name' 
+                        className='form-control' 
+                        placeholder='Name' 
+                        value={data.name}
+                        onChange={handleChange}
+                    />
+                </div>
                 <div className='form-group mb-3'>
                     <input 
                         type='email' 

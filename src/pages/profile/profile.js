@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../services/auth';
+import useRefreshToken from '../../hooks/useRefreshToken';
 
 function Profile() {
 
     const { authed, logout } = useAuth();
+    const refresh = useRefreshToken();
     const navigate = useNavigate();
 
     const handleLogout = (e) => {
@@ -31,6 +33,7 @@ function Profile() {
                         <Link className='' to='/register'>Register</Link>
                     </li>
                 </ul>
+                <button className='btn btn-secondary' onClick={() => refresh()}>Refresh</button>
             </div>
         </section>
     )
