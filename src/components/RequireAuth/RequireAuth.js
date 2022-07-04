@@ -3,13 +3,13 @@ import useAuth from '../../services/auth';
 
 function RequireAuth() {
 
-    const { authed } = useAuth();
+    const { auth } = useAuth();
     const location = useLocation();
 
     
-    console.log(authed);
+    console.log(auth);
 
-    return authed?.user ? (
+    return auth?.user ? (
         <Outlet />
     ) : (
         <Navigate to='/login' replace state={{ path: location.pathname }} />

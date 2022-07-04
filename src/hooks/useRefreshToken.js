@@ -3,7 +3,7 @@ import useAuth from '../services/auth';
 
 const useRefreshToken = () => {
 
-    const { setAuthed } = useAuth();
+    const { setAuth } = useAuth();
 
     const refresh = async () => {
         console.log('Refreshing...')
@@ -11,7 +11,7 @@ const useRefreshToken = () => {
             withCredentials: true
         });
 
-        setAuthed(prev => {
+        setAuth(prev => {
             console.log(prev, 1);
             console.log(response.data, 2);
             return {

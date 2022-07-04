@@ -4,7 +4,7 @@ import useAuth from '../../services/auth';
 
 const PersistLogin = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const { authed } = useAuth();
+    const { auth } = useAuth();
 
     return (
         <>

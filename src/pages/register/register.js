@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from '../../api/axios';
-import { apiUrl } from '../../services/util';
 
 const REGISTER_URL = '/user/register';
 

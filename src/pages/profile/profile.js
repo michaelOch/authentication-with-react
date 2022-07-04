@@ -1,24 +1,48 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../services/auth';
-import useRefreshToken from '../../hooks/useRefreshToken';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 function Profile() {
 
-    const { authed, logout } = useAuth();
-    const refresh = useRefreshToken();
+    const [user, setUser] = useState();
+    const axiosPrivate = useAxiosPrivate();
+
+    const { auth, logout } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const getUser = async () => {
+            try {
+                const response = await axiosPrivate.get('/user');
+                console.log(response.data);
+                isMounted && setUser(response.data);
+            } catch (error) {
+                console.error(error);
+                navigate('/login', { state: { path: location.pathname }, replace: true });
+            }
+        }
+
+        getUser();
+
+        return () => {
+            isMounted = false;
+        }
+    }, []);
 
     const handleLogout = (e) => {
         logout();
-        navigate('/');
+        navigate('/login');
     }
 
     return (
         <section className='profile-section'>
             <div className='p-5'>
                 <h2 className='text-primary'>Profile Page</h2>
-                {authed?.user && <button className='btn btn-primary' onClick={handleLogout}>Logout</button>}
+                {auth?.user && <button className='btn btn-primary' onClick={handleLogout}>Logout</button>}
                 <ul className='list-group'>
                     <li className='list-group-item'>
                         <Link className='' to='/home'>Home</Link>
@@ -33,7 +57,6 @@ function Profile() {
                         <Link className='' to='/register'>Register</Link>
                     </li>
                 </ul>
-                <button className='btn btn-secondary' onClick={() => refresh()}>Refresh</button>
             </div>
         </section>
     )
