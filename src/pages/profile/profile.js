@@ -2,15 +2,17 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../services/auth';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import useLogout from '../../hooks/useLogout';
 
 function Profile() {
 
     const [user, setUser] = useState();
     const axiosPrivate = useAxiosPrivate();
 
-    const { auth, logout } = useAuth();
+    const { auth } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+    const logout = useLogout();
 
     useEffect(() => {
         let isMounted = true;
@@ -33,8 +35,8 @@ function Profile() {
         }
     }, []);
 
-    const handleLogout = (e) => {
-        logout();
+    const handleLogout = async (e) => {
+        await logout();
         navigate('/login');
     }
 

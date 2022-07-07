@@ -9,7 +9,7 @@ function RequireAuth() {
     
     console.log(auth);
 
-    return auth?.user ? (
+    return auth?.token ? (
         <Outlet />
     ) : (
         <Navigate to='/login' replace state={{ path: location.pathname }} />

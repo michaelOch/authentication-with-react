@@ -5,19 +5,16 @@ const authContext = createContext();
 function useAuth() {
 
     const [auth, setAuth] = useState();
+    const [persist, setPersist] = useState(JSON.parse(localStorage.getItem('persist')) || false);
 
     return {
         auth,
         setAuth,
+        persist,
+        setPersist,
         login(data) {
             return new Promise((res) => {
                 setAuth(data);
-                res();
-            });
-        },
-        logout() {
-            return new Promise((res) => {
-                setAuth(null);
                 res();
             });
         }

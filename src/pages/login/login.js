@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../services/auth';
@@ -17,7 +17,7 @@ function Login() {
 
     const [data, setData] = useState(initialState);
     const navigate = useNavigate();
-    const { login } = useAuth();
+    const { login, persist, setPersist } = useAuth();
     const { state } = useLocation();
 
     const handleChange = (e) => {
@@ -28,6 +28,14 @@ function Login() {
             [e.target.name]: e.target.value
         })
     }
+
+    const togglePersist = () => {
+        setPersist(prev => !prev);
+    }
+
+    useEffect(() => {
+        localStorage.setItem('persist', persist);
+    }, [persist]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -116,6 +124,17 @@ function Login() {
                     >
                         {data.isSubmitting ? 'Submitting...' : 'Log In'}
                     </button>
+                </div>
+                <div className=''>
+                    <input 
+                        type="checkbox" 
+                        id='persist'
+                        name='persist' 
+                        className=''
+                        onChange={togglePersist}
+                        checked={persist}
+                    />
+                    <label htmlFor='persist'>Trust This Device</label>
                 </div>
             </form>
         </section>
