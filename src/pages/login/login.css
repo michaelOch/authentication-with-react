@@ -1,0 +1,13 @@
+@import '../../services//theme.css';
+
+.login-section {
+    max-width: 500px;
+    min-height: 80vh;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+    background-color: var(--theme-primary);
+    border-radius: 100%;
+}

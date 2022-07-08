@@ -1,0 +1,53 @@
+@import './services/theme.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--theme-secondary);
+    background-image: url(./assets/bg-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    color: #ffffff;
+}
+
+a {
+    color: var(--theme-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--theme-primary);
+}
+
+.navbar-brand {
+    color: #ffffff;
+}
+
+.btn {
+    border-radius: 25px;
+}
+
+.btn-primary {
+    background-color: var(--theme-primary);
+    border-color: var(--theme-primary);
+}
+
+.btn-primary:hover {
+    background-color: #0F52BA;
+    border-color: #0F52BA;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+.text-primary {
+    color: var(--theme-primary) !important;
+}
