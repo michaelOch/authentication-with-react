@@ -26,6 +26,18 @@ a:hover {
     color: var(--theme-primary);
 }
 
+table tr {
+    color: #ffffff;
+}
+
+.navbar a {
+    color: #ffffff;
+}
+
+.navbar a:hover {
+    color: #ffffff;
+}
+
 .logo {
     width: 30px;
     height: 30px;
@@ -61,4 +73,18 @@ a:hover {
 
 .text-primary {
     color: var(--theme-primary) !important;
+}
+
+.offcanvas-custom {
+    background-color: var(--theme-primary);
+    visibility: visible;
+}
+
+.offcanvas-custom .btn-primary {
+    background-color: var(--theme-secondary);
+    border-color: var(--theme-secondary);
+}
+
+.offcanvas-custom .nav-item span {
+    visibility: hidden;
 }

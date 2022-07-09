@@ -66,6 +66,10 @@ function Register() {
                 setData({
                     ...data,
                     successMessage: 'Account created successfully.',
+                    name: '',
+                    email: '',
+                    password: '',
+                    displayPassword: false,
                     errorMessage: null,
                     isSubmitting: false
                 })
