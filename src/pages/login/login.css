@@ -1,13 +1,11 @@
 @import '../../services//theme.css';
 
 .login-section {
-    max-width: 500px;
+    max-width: 400px;
     min-height: 80vh;
 }
 
-.logo {
-    width: 30px;
-    height: 30px;
-    background-color: var(--theme-primary);
-    border-radius: 100%;
+.login-section h6 {
+    text-transform: uppercase;
+    color: #36454F;
 }

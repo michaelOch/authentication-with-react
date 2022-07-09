@@ -26,6 +26,13 @@ a:hover {
     color: var(--theme-primary);
 }
 
+.logo {
+    width: 30px;
+    height: 30px;
+    background-color: var(--theme-primary);
+    border-radius: 100%;
+}
+
 .navbar-brand {
     color: #ffffff;
 }
@@ -46,6 +53,10 @@ a:hover {
 
 .form-control {
     border-radius: 10px;
+}
+
+.input-group-text {
+    border-radius: 0 10px 10px 0;
 }
 
 .text-primary {

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../services/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import './login.css';
 
@@ -14,7 +16,6 @@ function Login() {
         password: '',
         displayPassword: false,
         errorMessage: null,
-        successMessage: null,
         isSubmitting: false
     }
 
@@ -55,7 +56,6 @@ function Login() {
         setData({
             ...data,
             errorMessage: null,
-            successMessage: null,
             isSubmitting: true
         })
 
@@ -74,7 +74,6 @@ function Login() {
                 setData({
                     ...data,
                     isSubmitting: false,
-                    successMessage: 'Successful sign in',
                     errorMessage: null
                 })
 
@@ -87,16 +86,14 @@ function Login() {
                 setData({
                     ...data,
                     isSubmitting: false,
-                    errorMessage: 'Sign in failed!',
-                    successMessage: null
+                    errorMessage: 'Sign in failed!'
                 })
             })
         } else {
 
             setData({
                 ...data,
-                errorMessage: 'Empty field',
-                successMessage: null,
+                errorMessage: 'Empty field(s)',
                 isSubmitting: false
             })
         }
@@ -111,11 +108,17 @@ function Login() {
             </nav>
             <div className='container'>
                 <section className='login-section d-flex flex-column justify-content-center py-5'>
+                    <h6 className=''>Welcome back!</h6>
                     <h2 className=''>Sign in to your account<span className='text-primary'>.</span></h2>
                     <p className=''>Don't have an account? &nbsp;
                         <Link to='/register' className=''>Create Account</Link>
                     </p>
-                    <form className='w-75' onSubmit={handleSubmit}>
+                    {
+                        data.errorMessage && (
+                            <div className="alert alert-danger p-1" role='alert'>{data.errorMessage}</div>
+                        )
+                    }
+                    <form className='' onSubmit={handleSubmit}>
                         <div className="form-group mb-3">
                             <input 
                                 type="email" 
@@ -136,11 +139,11 @@ function Login() {
                                 value={data.password} 
                             />
                             <div className="input-group-append">
-                                <span className="input-group-text" onClick={toggleDisplayPassword}>
+                                <span className="input-group-text h-100" onClick={toggleDisplayPassword}>
                                     {
                                         data.displayPassword 
-                                            ? `don't`
-                                            : `show`
+                                            ? <FontAwesomeIcon icon={faEyeSlash} />
+                                            : <FontAwesomeIcon icon={faEye} />
                                     }
                                 </span>
                             </div>
