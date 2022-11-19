@@ -86,7 +86,7 @@ function Login() {
                 setData({
                     ...data,
                     isSubmitting: false,
-                    errorMessage: 'Sign in failed!'
+                    errorMessage: (error?.response?.data?.msg) ? (error?.response?.data?.msg) : 'Sign in failed!'
                 })
             })
         } else {
@@ -107,69 +107,71 @@ function Login() {
                 </div>
             </nav>
             <div className='container'>
-                <section className='login-section d-flex flex-column justify-content-center py-5'>
-                    <h6 className=''>Welcome back!</h6>
-                    <h2 className=''>Sign in to your account<span className='text-primary'>.</span></h2>
-                    <p className=''>Don't have an account? &nbsp;
-                        <Link to='/register' className=''>Create Account</Link>
-                    </p>
-                    {
-                        data.errorMessage && (
-                            <div className="alert alert-danger p-1" role='alert'>{data.errorMessage}</div>
-                        )
-                    }
-                    <form className='' onSubmit={handleSubmit}>
-                        <div className="form-group mb-3">
-                            <input 
-                                type="email" 
-                                name="email" 
-                                className="form-control" 
-                                placeholder="Email" 
-                                value={data.email}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="input-group mb-4">
-                            <input 
-                                type={ data.displayPassword ? 'text' : 'password' } 
-                                name="password" 
-                                className="form-control" 
-                                placeholder="Password" 
-                                onChange={handleChange} 
-                                value={data.password} 
-                            />
-                            <div className="input-group-append">
-                                <span className="input-group-text h-100" onClick={toggleDisplayPassword}>
-                                    {
-                                        data.displayPassword 
-                                            ? <FontAwesomeIcon icon={faEyeSlash} />
-                                            : <FontAwesomeIcon icon={faEye} />
-                                    }
-                                </span>
+                <div className='d-flex justify-content-center align-items-center login-wrapper'>
+                    <section className='login-section d-flex flex-column justify-content-center px-4 py-5'>
+                        <h6 className=''>Welcome back!</h6>
+                        <h2 className=''>Sign in to your account<span className='text-primary'>.</span></h2>
+                        <p className=''>Don't have an account? &nbsp;
+                            <Link to='/register' className=''>Create Account</Link>
+                        </p>
+                        {
+                            data.errorMessage && (
+                                <div className="alert alert-danger p-1" role='alert'>{data.errorMessage}</div>
+                            )
+                        }
+                        <form className='' onSubmit={handleSubmit}>
+                            <div className="form-group mb-3">
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    className="form-control" 
+                                    placeholder="Email" 
+                                    value={data.email}
+                                    onChange={handleChange}
+                                />
                             </div>
-                        </div>
-                        <div className="">
-                            <button 
-                                type='submit' 
-                                className='btn btn-primary btn-block' 
-                                disabled={data.isSubmitting ? true : false}
-                            >
-                                {data.isSubmitting ? 'Submitting...' : 'Sign In'}
-                            </button>
-                        </div>
-                        <div className='form-check mt-3'>
-                            <input 
-                                type="checkbox" 
-                                id='persist'
-                                name='persist' 
-                                className='form-check-input'
-                                onChange={togglePersist}
-                                checked={persist}
-                            />
-                            <label htmlFor='persist' className='form-check-label'>Trust This Device</label>
-                        </div>
-                    </form>
-                </section>
+                            <div className="input-group mb-4">
+                                <input 
+                                    type={ data.displayPassword ? 'text' : 'password' } 
+                                    name="password" 
+                                    className="form-control" 
+                                    placeholder="Password" 
+                                    onChange={handleChange} 
+                                    value={data.password} 
+                                />
+                                <div className="input-group-append">
+                                    <span className="input-group-text h-100" onClick={toggleDisplayPassword}>
+                                        {
+                                            data.displayPassword 
+                                                ? <FontAwesomeIcon icon={faEyeSlash} />
+                                                : <FontAwesomeIcon icon={faEye} />
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="">
+                                <button 
+                                    type='submit' 
+                                    className='btn btn-primary btn-block' 
+                                    disabled={data.isSubmitting ? true : false}
+                                >
+                                    {data.isSubmitting ? 'Submitting...' : 'Sign In'}
+                                </button>
+                            </div>
+                            <div className='form-check mt-3'>
+                                <input 
+                                    type="checkbox" 
+                                    id='persist'
+                                    name='persist' 
+                                    className='form-check-input'
+                                    onChange={togglePersist}
+                                    checked={persist}
+                                />
+                                <label htmlFor='persist' className='form-check-label'>Trust This Device</label>
+                            </div>
+                        </form>
+                    </section>
+                </div>
             </div>
         </div>
     )

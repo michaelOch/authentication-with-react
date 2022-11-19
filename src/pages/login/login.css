@@ -1,8 +1,16 @@
 @import '../../services//theme.css';
 
-.login-section {
-    max-width: 400px;
+.login-wrapper {
     min-height: 80vh;
+}
+
+.login-section {
+    background-color: transparent;
+    max-width: 400px;
+    /* min-height: 80vh; */
+    border: 1px solid #36454F;
+    border-radius: 5px;
+    box-shadow: 5px 10px #36454F;
 }
 
 .login-section h6 {

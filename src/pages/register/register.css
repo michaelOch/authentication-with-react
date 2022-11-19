@@ -1,8 +1,15 @@
 @import '../../services/theme.css';
 
+.register-wrapper {
+    min-height: 80vh;
+}
+
 .register-section {
     max-width: 400px;
-    min-height: 80vh;
+    /* min-height: 80vh; */
+    border: 1px solid #36454F;
+    border-radius: 5px;
+    box-shadow: 5px 10px #36454F;
 }
 
 .register-section h6 {
